@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.crowd.server.da.mybatis.mapper.SurveyMapper">
+
+
+    <select id="selectSurveyByCompanyIdAndNoAnswer" parameterType="Long" resultType="net.crowd.server.entity.Survey">
+        SELECT
+        id,
+        company_id,
+        content,
+        phone_number,
+        date,
+        answer_yn
+	FROM lt_survey where answer_yn ='n' and company_id=#{company_id}
+    </select>
+
+
+
+
+
+</mapper>
+

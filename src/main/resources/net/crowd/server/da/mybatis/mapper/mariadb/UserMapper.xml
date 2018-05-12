@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.crowd.server.da.mybatis.mapper.UserMapper">
+
+    <insert id="insert">
+        INSERT INTO lt_user (
+        access_token,
+        name,
+        phone_number,
+        id,
+        point,
+        position,
+        date
+        ) VALUES (
+        #{access_token},
+        #{name},
+        #{phone_number},
+        #{id},
+        #{point},
+        #{position},
+        now()
+        )
+    </insert>
+
+    <select id="selectUserByPhoneNumber" parameterType="String" resultType="net.crowd.server.entity.User">
+        SELECT
+		access_token,
+        name,
+        phone_number,
+        id,
+        point,
+        position,
+        date
+	FROM lt_user where phone_number=#{phone_number}
+    </select>
+
+    <select id="selectUserByPhoneNumberAndCompanyId" parameterType="HashMap" resultType="net.crowd.server.entity.UserInCompany">
+        SELECT
+        sequence,
+        phone_number,
+        company_id,
+        point,
+        position
+	FROM lt_user_company_map where phone_number=#{phone_number} and company_id=#{company_id}
+    </select>
+
+
+    <insert id="insertUserInCompany">
+        INSERT INTO lt_user_company_map (
+       phone_number,
+       company_id,
+       point,
+       position
+        ) VALUES (
+        #{phone_number},
+        #{company_id},
+        #{point},
+        #{position}
+        )
+    </insert>
+
+
+
+
+</mapper>
